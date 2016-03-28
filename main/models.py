@@ -38,3 +38,15 @@ class Order(models.Model):
 
     def __str__(self):
         return self.id
+
+
+class Profile(models.Model):
+    user = models.OneToOneField('auth.User')
+    address = models.TextField()
+    postal_code = models.CharField(max_length=16)
+    phone = models.CharField(max_length=16)
+    is_confirmed = models.BooleanField(default=False)
+
+    def __str__(self):
+        self.user
+
