@@ -12,14 +12,14 @@ class Service(models.Model):
     workflow = models.ForeignKey('Workflow')
 
     def __str__(self):
-        return self.workflow.step_set.all().__str__()
+        return self.title
 
 
 class Workflow(models.Model):
     title = models.CharField(max_length=256)
 
     def __str__(self):
-        return self.step_set.all().__str__()
+        return self.title
 
 
 class Step(models.Model):
@@ -38,4 +38,4 @@ class Order(models.Model):
     step_order = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.service_set.all().__str__()
+        return self.id
