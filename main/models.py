@@ -10,14 +10,16 @@ class Service(models.Model):
     parent_service = models.ForeignKey('self', blank=True, null=True, default=0)
     cost = models.IntegerField()
     workflow = models.ForeignKey('Workflow')
-    step_order = models.IntegerField()
+
+    def __str__(self):
+        return self.workflow.step_set.all().__str__()
 
 
 class Workflow(models.Model):
     title = models.CharField(max_length=256)
 
     def __str__(self):
-        return self.title
+        return self.step_set.all().__str__()
 
 
 class Step(models.Model):
@@ -25,8 +27,15 @@ class Step(models.Model):
     workflow = models.ForeignKey('Workflow')
     order = models.IntegerField()
 
+    def __str__(self):
+        return self.title
+
 
 class Order(models.Model):
     user = models.ForeignKey('auth.User')
     created = models.DateTimeField(auto_now_add=True)
     service_set = models.ManyToManyField("Service")
+    step_order = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.service_set.all().__str__()
