@@ -126,4 +126,5 @@ SMS_SETTINGS = {
     "username": '9136496628',
     "password": '8406',
     "from": '50001333789521',
+    "url": 'http://87.107.121.52/post/send.asmx?WSDL',
 }
