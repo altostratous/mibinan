@@ -7,4 +7,5 @@ from django.http import HttpResponse
 
 # @permission_required('add_user')
 def index(request):
-    return render(request, 'main/index.html', {})
+    return render(request, 'main/simpleform.html', {'title_for_layout': 'hello',
+                                              'nav_bar': {'اول': 'hello', 'دوم': 'hello'}})
