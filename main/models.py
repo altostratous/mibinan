@@ -10,6 +10,8 @@ class Service(models.Model):
     parent_service = models.ForeignKey('self', blank=True, null=True, default=0)
     cost = models.IntegerField()
     workflow = models.ForeignKey('Workflow')
+    is_countable = models.BooleanField(default=False)
+    is_multiple = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title

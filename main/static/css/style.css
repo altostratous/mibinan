@@ -108,3 +108,10 @@ select {
     display: block !important;
     height: auto;
 }
+
+.service_input {
+    border: solid 1px !important;
+    border-color: rgb(200, 200, 200) !important;
+    border-top: none !important;
+    padding: 10px;
+}
