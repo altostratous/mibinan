@@ -103,3 +103,8 @@ span:lang(en) {
 .work-stream ul {
     list-style: none;
 }
+
+select {
+    display: block !important;
+    height: auto;
+}

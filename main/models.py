@@ -14,6 +14,14 @@ class Service(models.Model):
     def __str__(self):
         return self.title
 
+    def get_tree(self, include_self=True):
+        r = []
+        if include_self:
+            r.append(self)
+        for c in Service.objects.filter(parent_service=self):
+            r.append({self: c.get_tree(include_self=False)})
+            return r
+
 
 class Workflow(models.Model):
     title = models.CharField(max_length=256)

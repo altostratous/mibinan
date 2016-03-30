@@ -8,4 +8,3 @@ class ServiceForm(forms.ModelForm):
         model = Service
         fields = ('title', 'description',)
 
-
