@@ -2,8 +2,9 @@ from django.shortcuts import render
 from .forms import *
 from django.http import HttpResponse
 from .helpers.service import ServicesHelper
+from django.contrib.auth.decorators import *
 
-# from django.contrib.auth.decorators import permission_required
+
 # Create your views here.
 
 
@@ -19,6 +20,7 @@ def index(request):
                                                         'nav_bar': {'اول': 'hello', 'دوم': 'hello'}})
 
 
+@login_required
 def order(request):
     if request.method == 'POST':
         service_ids = dict(request.POST)['service_ids']

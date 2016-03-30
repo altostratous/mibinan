@@ -10,12 +10,12 @@ class ServicesHelper:
     def html(self, tree):
         temp = ServiceHelper(tree[0])
         if tree[1].__len__() == 0:
-            temp = '<li class = "service_input">%s<div class="service_toggle_%d service_input">' % (temp, tree[0].id)
+            temp = '<li class = "service_input">%s<div class="service_toggle_%d">' % (temp, tree[0].id)
         else:
-            temp = '<ul class = "service_input">%s<div class="service_toggle_%d service_input">' % (temp, tree[0].id)
+            temp = '<ul class = "service_input">%s<div class="service_toggle_%d">' % (temp, tree[0].id)
         for node in tree[1]:
             temp += self.html(node)
-        temp + "</div>"
+        temp += "</div>"
         if tree[1].__len__() == 0:
             temp += '</li>'
         else:
@@ -37,10 +37,14 @@ class ServiceHelper:
         choice_type = "radio"
         if self.service.is_multiple:
             choice_type = "checkbox"
+        is_parent = ''
+        if self.service.parent_service is None:
+            is_parent = 'class = "parent_service"'
         temp += '<input type = "%s" id = "service_checkboxes_%d" name = "service_checkboxes_%d" /><label for=\
-        "service_checkboxes_%d" onclick="toggle(%d)" >%s</label>' % (choice_type, self.service.id, self.service.id,
-                                                                     self.service.id, self.service.id,
-                                                                     self.service.title)
+        "service_checkboxes_%d" onclick="toggle(%d)" %s >%s</label>' % (choice_type, self.service.id, self.service.id,
+                                                                        self.service.id, self.service.id,
+                                                                        is_parent,
+                                                                        self.service.title)
         temp += '<div class="service_toggle_%d"><p>%s</p>' % (self.service.id, self.service.description)
         temp += '<input type = "hidden" name = "service_ids" value=%d />' % self.service.id
         temp += '<input type = "text" name = "service_descriptions" placeholder="توضیحات" />'
