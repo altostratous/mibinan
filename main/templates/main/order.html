@@ -2,9 +2,9 @@
 
 {% block content %}
 <h1>ثبت سفارش</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form }}
+    <form method="POST" class="post-form" action="#">{% csrf_token %}
+        {{ services|safe }}
+        {{ post }}
         <button type="submit" class="save btn btn-default">ثبت</button>
     </form>
-    {{ services }}
 {% endblock %}

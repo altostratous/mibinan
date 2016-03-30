@@ -14,13 +14,11 @@ class Service(models.Model):
     def __str__(self):
         return self.title
 
-    def get_tree(self, include_self=True):
-        r = []
-        if include_self:
-            r.append(self)
+    def get_tree(self):
+        r = [self, []]
         for c in Service.objects.filter(parent_service=self):
-            r.append({self: c.get_tree(include_self=False)})
-            return r
+            r[1].append(c.get_tree())
+        return r
 
 
 class Workflow(models.Model):
@@ -42,7 +40,6 @@ class Step(models.Model):
 class Order(models.Model):
     user = models.ForeignKey('auth.User')
     created = models.DateTimeField(auto_now_add=True)
-    step_order = models.IntegerField(default=0)
 
     def __str__(self):
         return self.id.__str__()
@@ -52,6 +49,7 @@ class SubOrder(models.Model):
     order = models.ForeignKey('Order')
     service = models.ForeignKey('Service')
     description = models.TextField()
+    count = models.IntegerField(default=0)
 
 
 class WorkflowLog(models.Model):

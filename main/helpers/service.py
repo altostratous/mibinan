@@ -8,21 +8,20 @@ class ServicesHelper:
         self.service_tree = service_tree
 
     def html(self, tree):
-        temp = "<ul>"
-        for node in tree:
-            if isinstance(node, dict):
-                temp += '<ul>%s%s</ul>' % (list(node.keys())[0], self.html(list(node.values())[0]))
-            else:
-                temp += '<li>%s</li>' % ServiceHelper(node)
-        temp += "</ul>"
-        return temp
+        temp = ServiceHelper(tree[0])
+        if tree[1].__len__() == 0:
+            return "<li>%s</li>" % temp
+        else:
+            temp = "<ul>%s" % temp
+        for node in tree[1]:
+            temp += self.html(node)
+        return temp + "</ul>"
 
     def __str__(self):
         return self.html(self.service_tree)
 
 
 class ServiceHelper:
-
     service = Service()
 
     def __init__(self, service):
@@ -30,9 +29,11 @@ class ServiceHelper:
 
     def __str__(self):
         temp = '<div class = "service_input">'
-        temp += '<span>%s</span>' % self.service.title
+        temp += '<h3>%s</h3>' % self.service.title
         temp += '<p>%s</p>' % self.service.description
-        temp += '<input type = "checkbox" name = "service_checkboxes" />'
+        temp += '<input type = "hidden" name = "service_ids" value=%d />' % self.service.id
+        temp += '<input type = "checkbox" id = "service_checkboxes_%d" name = "service_checkboxes_%d" /><label for=\
+        "service_checkboxes_%d" ></label>' % (self.service.id, self.service.id, self.service.id)
         temp += '<input type = "text" name = "service_descriptions" placeholder="توضیحات" />'
         temp += '<input type = "number" name = "service_counts" />'
         temp += '</div>'
