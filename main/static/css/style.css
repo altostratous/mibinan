@@ -115,3 +115,36 @@ select {
     border-top: none !important;
     padding: 10px;
 }
+
+div.order {
+    border: solid 1px !important;
+    border-color: rgb(200, 200, 200) !important;
+    border-top: none !important;
+    padding: 10px;
+}
+
+.label {
+    text-decoration: none;
+    color: #fff;
+    background-color: #96a69a;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    outline: 0;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.btn-confirm {
+    background-color: #26F69a !important;
+}
+
+.btn-cancel {
+    background-color: #F6262a !important;
+}

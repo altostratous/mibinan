@@ -3,5 +3,13 @@
 
 {% block content %}
 <h1>سفارش های من</h1>
-    {{ orders }}
+    <hr>
+    {% for order in orders %}
+        <div class="order">
+            <strong class="label">سفارش شماره {{ order.id }}</strong>
+            <a href="{% url 'orders_add' %}" class="btn btn-edit">ویرایش</a>
+            <a href="{% url 'orders_add' %}" class="btn btn-cancel">لغو</a>
+            <a href="{% url 'orders_add' %}" class="btn btn-confirm">تایید</a>
+        </div>
+    {% endfor %}
 {% endblock %}
