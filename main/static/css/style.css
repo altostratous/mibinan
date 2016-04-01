@@ -148,3 +148,14 @@ div.order {
 .btn-cancel {
     background-color: #F6262a !important;
 }
+
+.workflow_arrow {
+    padding: 0px 5px 5px 5px !important;
+}
+
+.workflow {
+    padding: 3px !important;
+}
+.workflow * {
+    margin: 5px !important;
+}

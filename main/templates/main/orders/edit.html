@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+{% load staticfiles%}
+
+{% block content %}
+    <h1>سفارش شماره {{ order.id }}</h1>
+    <h3>خدمت های درخواست شده</h3>
+    <p>
+    {% for suborder in order.suborder_set.all %}
+        {{ suborder.service }}<br>
+    {% endfor %}
+    </p>
+    <h3>روند کار</h3>
+    {{ workflow|safe }}
+{% endblock %}

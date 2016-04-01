@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from ..forms import *
-# from django.http import HttpResponse
+from django.http import HttpResponse
 from ..helpers.service import ServicesHelper
+from ..helpers.workflow import WorkflowHelper
 from django.contrib.auth.decorators import *
 
 
@@ -15,6 +16,11 @@ def orders_add(request):
         the_order.user = request.user
         the_order.full_clean()
         the_order.save()
+        log = WorkflowLog()
+        log.order = the_order
+        log.description = "سفارش سبت شد."
+        log.step_move = StepMove.objects.get(into_step=Step.objects.get(order=1), from_step=Step.objects.get(order=2))
+        log.save()
         for i in range(service_ids.__len__()):
             if ("service_checkboxes_%s" % service_ids[i]) in dict(request.POST):
                 sub_order = SubOrder()
@@ -36,3 +42,10 @@ def orders_add(request):
 def index(request):
     data = Order.objects.filter(user=request.user)
     return render(request, 'main/orders/index.html', {'orders': data})
+
+
+def edit(request, id):
+    data = Order.objects.get(user=request.user, id=id)
+    return render(request, 'main/orders/edit.html', {'order': data,
+                                                     'workflow': WorkflowHelper(data)})
+
