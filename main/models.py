@@ -50,6 +50,20 @@ class Order(models.Model):
                 return service.workflow
         return None
 
+    def get_forward_move(self):
+        return self.get_move_to(1)
+
+    def get_backward_move(self):
+        return self.get_move_to(-1)
+
+    def get_move_to(self, movement):
+        last_log = self.workflowlog_set.all().reverse()[0]
+        current_step = last_log.step_move.into_step
+        next_step_order = last_log.step_move.into_step.order + movement
+        next_step = Step.objects.get(order=next_step_order)
+        result = StepMove.objects.get(into_step=next_step, from_step=current_step)
+        return result
+
     def get_service_set(self):
         service_set = []
         for suborder in self.suborder_set.all():

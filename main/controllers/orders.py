@@ -51,10 +51,18 @@ def edit(request, id):
 
 
 def forward(request, id):
-    # do stuff
+    order = Order.objects.get(id=id)
+    log = WorkflowLog()
+    log.step_move = order.get_forward_move()
+    log.order = order
+    log.save()
     return edit(request, id)
 
 
 def backward(request, id):
-    # do stuff
+    order = Order.objects.get(id=id)
+    log = WorkflowLog()
+    log.step_move = order.get_backward_move()
+    log.order = order
+    log.save()
     return edit(request, id)
