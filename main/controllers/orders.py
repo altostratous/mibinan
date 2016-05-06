@@ -49,3 +49,12 @@ def edit(request, id):
     return render(request, 'main/orders/edit.html', {'order': data,
                                                      'workflow': WorkflowHelper(data)})
 
+
+def forward(request, id):
+    # do stuff
+    return edit(request, id)
+
+
+def backward(request, id):
+    # do stuff
+    return edit(request, id)
